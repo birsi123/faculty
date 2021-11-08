@@ -18,21 +18,35 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.red[600],
       ),
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('hello, world'),
-          FlatButton(
-              onPressed: (){},
-              color: Colors.amber,
-              child: Text('click me')
+        children: <Widget>[
+          Expanded(
+              child: Image.asset('assets/genesis-g80.png'),
+            flex: 3,
           ),
-          Center(
+          Expanded(
+            flex: 1,
             child: Container(
-              color:Colors.yellow,
-              padding: EdgeInsets.all(30.0),
-              child: Text('inside container'),
+            padding: EdgeInsets.all(30.0),
+            color: Colors.cyan,
+            child: Text('1'),
             ),
-          )
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(30.0),
+              color: Colors.pink,
+              child: Text('2'),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(30.0),
+              color: Colors.yellow,
+              child: Text('3'),
+            ),
+          ),
         ],
       ),
         floatingActionButton: FloatingActionButton(
