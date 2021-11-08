@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,7 +17,7 @@ class BirsanCard extends StatefulWidget {
 class _BirsanCardState extends State<BirsanCard> {
 
   var numar = "";
-
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,37 +28,13 @@ class _BirsanCardState extends State<BirsanCard> {
         backgroundColor: Colors.black,
         elevation: 0.0,
       ),
-      floatingActionButton: Container(
-        height: 100.0,
-        width: 100.0,
-        child: FittedBox(
-          child: FloatingActionButton(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 5.0),
-                child: Text(
-                    ('Afla numarul regelui'),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 10.0,
-                  ),
-                  ),
-              ),
-            ),
-              onPressed: (){
-                setState(() {
-                  numar = "10";
-                });
-              }
-          ),
-          ),
-        ),
-      body: Padding(
+      body: Container(
         padding: EdgeInsets.fromLTRB(30.0,40.0,30.0,0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
+            Container(
+              alignment: Alignment.center,
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/hagi.jpg'),
                 radius: 40.0,
@@ -100,24 +79,69 @@ class _BirsanCardState extends State<BirsanCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 30.0),
+            Spacer(),
             Row(
-              children: <Widget>[
-                Icon(
-                  Icons.email,
-                  color: Colors.grey[400],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  color: Colors.green,
+                    iconSize: 40,
+                    onPressed: (){
+                      launch('tel:0754760187');
+                    },
+                    icon: Icon(
+                        Icons.add_call
+                    )
                 ),
-                SizedBox(width: 10.0),
-                Text(
-                  'gicahagi10@romania.ro',
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize: 20.0,
-                    letterSpacing: 1.0,
+                Container(
+                  child: AnimatedContainer(
+                    alignment: Alignment.bottomCenter,
+                    duration: Duration(seconds: 2),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Color.fromRGBO(0, 160, 227, 1))
+                      ),
+                      padding: EdgeInsets.all(10.0),
+                      color: Color.fromRGBO(0, 160, 227, 1),
+                      textColor: Colors.white,
+                      child: Text("Contacteaza-l pe Hagi",
+                          style: TextStyle(fontSize: 15)),
+                      onPressed: () {
+                        launch("mailto:hagi10@fotbal.ro");
+                      } ,
+                    ),
+                  ),
+                  ),
+                Container(
+                  height: 75.0,
+                  width: 75.0,
+                  child: FittedBox(
+                    child: FloatingActionButton(
+                        child: Center(
+                          child: Text(
+                            ('Afla numarul regelui'),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ),
+                        onPressed: (){
+                          isPressed= !isPressed;
+                          setState(() {
+                            if(isPressed == true)
+                              numar = "10";
+                            else
+                              numar = "";
+                          });
+                        }
+                    ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
